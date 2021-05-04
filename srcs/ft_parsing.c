@@ -1,6 +1,6 @@
 #include "../includes/push_swap.h"
 
-t_global		*ft_parsing(char	**av)
+t_global		ft_parsing(char	**av)
 {
 	int	i;
 	int	j;
@@ -17,13 +17,19 @@ t_global		*ft_parsing(char	**av)
 		while (av[j])
 		{
 			if (ft_atoi(av[i]) == ft_atoi(av[j]))
-				return(-1); //erreur duplicates numbers
+			{
+				global.erreur = -1;
+				return(global); //erreur duplicates numbers
+			}
 			j++;
 		}
 		while (av[i][x])
 		{
 			if (ft_isalnum(av[i][x]) == 0)
-				return (-2); // erreur not alnum
+			{
+				global.erreur = -2;
+				return(global); // erreur not alnum
+			}
 			x++;
 		}
 		i++;
@@ -62,5 +68,7 @@ t_global		*ft_parsing(char	**av)
 		i++;
 		x++;
 	}
-	
+	global.min = global.result[0];
+	global.max = global.result[global.len];
+	return (global);
 }
