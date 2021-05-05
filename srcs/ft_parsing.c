@@ -62,6 +62,7 @@ t_global		ft_parsing(char	**av)
 		i++;
 		j++;
 	}
+	global.a->len = global.len;
 
 	//creation du globale.result qui sera notre tableau fini pour comparer
 	int temp;
@@ -80,15 +81,6 @@ t_global		ft_parsing(char	**av)
 			j++;
 		}
 		i++;
-	}
-	
-
-	x = 0;
-	while (x != global.len)
-	{
-//		dprintf(1, "a = [%d]\n", global.a->lst[x]);
-		dprintf(1, "res = [%d]\n", global.result[x]);
-		x++;
 	}
 
 	return (global);

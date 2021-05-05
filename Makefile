@@ -2,7 +2,11 @@ NAME1	= test #checker
 #NAME2	= push_swap
 
 CFLAGS 	= -Wall -Wextra -Werror -g
-SRC1 	= ft_parsing.c main.c
+SRC1 	= ft_parsing.c main.c \
+			ft_sa.c ft_sb.c ft_ss.c \
+			ft_pa.c ft_pb.c \
+			ft_ra.c ft_rb.c ft_rr.c \
+			ft_rra.c ft_rrb.c ft_rrr.c \
 
 #SRC2 	= 
 

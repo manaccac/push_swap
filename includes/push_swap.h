@@ -33,4 +33,17 @@ typedef struct	s_b
 
 t_global		ft_parsing(char	**av);
 
+
+void			ft_sa(t_global *global);
+void			ft_sb(t_global *global);
+void			ft_ss(t_global *global);
+void			ft_pa(t_global *global);
+void			ft_pb(t_global *global);
+void			ft_ra(t_global *global);
+void			ft_rb(t_global *global);
+void			ft_rr(t_global *global);
+void			ft_rra(t_global *global);
+void			ft_rrb(t_global *global);
+void			ft_rrr(t_global *global);
+
 #endif
