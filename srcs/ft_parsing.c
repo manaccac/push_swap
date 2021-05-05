@@ -1,5 +1,19 @@
 #include "../includes/push_swap.h"
 
+int ft_check_dupl(int j, int *res, int c)
+{
+	//ft_checker doublon
+	int o = 0;
+	while (o != j)
+	{
+		if (res[o] == c)
+			return (1);
+		o++;
+		/* code */
+	}
+	return (0);
+}
+
 t_global		ft_parsing(char	**av)
 {
 	int	i;
@@ -25,7 +39,7 @@ t_global		ft_parsing(char	**av)
 		}
 		while (av[i][x])
 		{
-			if (ft_isalnum(av[i][x]) == 0)
+			if (ft_isalnum(av[i][x]) == 0 && (av[i][x] == '-' && (av[i][x + 1] == '\0' || ft_isalnum(av[i][x + 1]) == 0))) // verif si ce nest pas ecrit -1 ou bien que ce nets pqs un chiffre
 			{
 				global.erreur = -2;
 				return(global); // erreur not alnum
@@ -35,40 +49,47 @@ t_global		ft_parsing(char	**av)
 		i++;
 		global.len++;
 	}
-	global.a = calloc(sizeof(int), global.len + 1);
-	global.b = calloc(sizeof(int), global.len + 1);
+	global.a->lst = calloc(sizeof(int), global.len + 1);
+	global.b->lst = calloc(sizeof(int), global.len + 1);
 	global.result = calloc(sizeof(int), global.len + 1);
-	global.a->len = global.len;
 	i = 1;
 	j = 0;
 	// on mets tous dans le a;
 	while (av[i])
 	{
-		global.a->lst[j] == ft_atoi(av[i]);
+		global.a->lst[j] = ft_atoi(av[i]);
+		global.result[j] = ft_atoi(av[i]);
 		i++;
 		j++;
 	}
-	//creation de res qui sera le resulta attendu apres l'algo
+
+	//creation du globale.result qui sera notre tableau fini pour comparer
+	int temp;
 	i = 0;
-	x = 0;
-	while (global.a->lst[i])
+	while (i != global.len)
 	{
-		if (global.a->lst[i + 1] == "\0") // si on ne peut pas aller a j alors on mets le i a la fin et on sort de ce while
-		{
-			global.result[x] = global.a->lst[i];
-			break;
-		}
 		j = i + 1;
-		while (global.a->lst[i] > global.a->lst[j])
+		while (j != global.len)
+		{
+			if (global.result[j] < global.result[i])
+			{
+				temp = global.result[j];
+				global.result[j] = global.result[i];
+				global.result[i] = temp;
+			}
 			j++;
-		if (global.a->lst[i] < global.a->lst[j])
-			global.result[x] = global.a->lst[j];
-		else
-			global.result[x] = global.a->lst[i];
+		}
 		i++;
+	}
+	
+
+	x = 0;
+	while (x != global.len)
+	{
+//		dprintf(1, "a = [%d]\n", global.a->lst[x]);
+		dprintf(1, "res = [%d]\n", global.result[x]);
 		x++;
 	}
-	global.min = global.result[0];
-	global.max = global.result[global.len];
+
 	return (global);
 }
