@@ -5,15 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: manaccac <manaccac@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/07 12:40:13 by jdel-ros          #+#    #+#             */
-/*   Updated: 2020/06/01 14:03:28 by manaccac         ###   ########lyon.fr   */
+/*   Created: 2021/03/16 10:44:02 by manaccac          #+#    #+#             */
+/*   Updated: 2021/05/06 11:25:45 by manaccac         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "libft.h"
 
-int		ft_isalnum(int c)
+int	ft_isalnum(int c)
 {
 	if (c)
 	{

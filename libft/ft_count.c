@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_count.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: manaccac <manaccac@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/14 13:22:49 by jdel-ros          #+#    #+#             */
-/*   Updated: 2020/06/01 14:04:02 by manaccac         ###   ########lyon.fr   */
+/*   Created: 2021/03/16 10:43:58 by manaccac          #+#    #+#             */
+/*   Updated: 2021/05/06 11:25:45 by manaccac         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
+int	ft_count_int(int n)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	if (s)
+	while (n >= 10)
 	{
-		while (s[i])
-		{
-			write(fd, &s[i], 1);
-			i++;
-		}
-		write(fd, "\n", 1);
+		n /= 10;
+		i++;
 	}
+	if (n >= 0)
+		i++;
+	return (i);
 }

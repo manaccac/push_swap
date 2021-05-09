@@ -5,24 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: manaccac <manaccac@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/07 12:36:53 by jdel-ros          #+#    #+#             */
-/*   Updated: 2020/06/01 14:04:27 by manaccac         ###   ########lyon.fr   */
+/*   Created: 2021/03/16 10:51:34 by manaccac          #+#    #+#             */
+/*   Updated: 2021/05/06 11:25:45 by manaccac         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "libft.h"
 
-size_t		ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
-	int i;
+	int	i;
 
-	if (*s)
-	{
-		i = 0;
-		while (s[i] != '\0')
-			i++;
-		return (i);
-	}
-	return (0);
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
 }

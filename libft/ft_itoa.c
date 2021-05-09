@@ -5,74 +5,76 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: manaccac <manaccac@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/14 13:11:54 by jdel-ros          #+#    #+#             */
-/*   Updated: 2020/06/01 14:03:45 by manaccac         ###   ########lyon.fr   */
+/*   Created: 2021/03/16 10:48:27 by manaccac          #+#    #+#             */
+/*   Updated: 2021/05/06 11:25:45 by manaccac         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "libft.h"
 
-static int			ft_intlen(long int n)
+static	int	ft_taille(int n)
 {
-	int len;
+	int			i;
+	long int	nb;
 
-	len = 0;
-	if (n < 0)
+	i = 0;
+	nb = n;
+	if (nb == 0)
+		return (1);
+	if (nb < 0)
 	{
-		n = n * -1;
-		len++;
+		i = 1;
+		nb = nb * -1;
 	}
-	while (n > 0)
+	while (nb > 0)
 	{
-		n = n / 10;
-		len++;
+		nb = nb / 10;
+		i++;
 	}
-	return (len);
+	if (nb < 10 && nb > 0)
+		return (i + 1);
+	else
+		return (i);
 }
 
-static char			*ft_intzero(int n)
+static char	*ft_zero(long int n)
 {
-	long int	nl;
-	char		*res;
+	char	*str;
 
-	nl = n;
-	if (!(res = (char*)malloc(sizeof(char) * (2))))
-		return (NULL);
-	if (nl == 0)
+	str = NULL;
+	if (n == 0)
 	{
-		res[0] = 0 + 48;
-		res[1] = '\0';
-		return (res);
+		str = malloc(2 * sizeof(char));
+		str[0] = n + 48;
+		str[1] = '\0';
 	}
-	return (res);
+	return (str);
 }
 
-char				*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
-	long int	nl;
-	long int	len;
-	char		*res;
+	char		*str;
+	int			len;
+	long int	nb;
 
-	len = ft_intlen(n);
-	nl = n;
-	if (nl == 0)
-	{
-		res = ft_intzero(n);
-		return (res);
-	}
-	if (!(res = (char*)malloc(sizeof(char) * (len + 1))))
+	len = ft_taille(n);
+	nb = (long int)n;
+	if (nb == 0)
+		return (ft_zero(nb));
+	str = malloc((len + 1) * sizeof(char));
+	if (!(str))
 		return (NULL);
-	res[len--] = '\0';
-	if (nl < 0)
+	if (nb <= 0)
 	{
-		res[0] = '-';
-		nl = nl * -1;
+		nb = nb * -1;
+		str[0] = '-';
 	}
-	while (nl > 0)
+	str[len--] = '\0';
+	while (nb > 0)
 	{
-		res[len--] = (nl % 10) + 48;
-		nl = nl / 10;
+		str[len] = (nb % 10) + 48;
+		nb = nb / 10;
+		len--;
 	}
-	return (res);
+	return (str);
 }

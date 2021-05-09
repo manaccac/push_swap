@@ -5,22 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: manaccac <manaccac@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/07 12:40:13 by jdel-ros          #+#    #+#             */
-/*   Updated: 2020/06/01 14:03:34 by manaccac         ###   ########lyon.fr   */
+/*   Created: 2021/03/16 10:47:01 by manaccac          #+#    #+#             */
+/*   Updated: 2021/05/06 11:25:45 by manaccac         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "libft.h"
-
-int		ft_isdigit(int c)
+int	ft_isdigit(int c)
 {
-	if (c)
-	{
-		if ((c >= '0' && c <= '9') || c == '-')
-			return (1);
-		else
-			return (0);
-	}
-	return (0);
+	if (48 <= c && c <= 57)
+		return (1);
+	else
+		return (0);
 }

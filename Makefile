@@ -1,14 +1,10 @@
-NAME1	= test #checker
-#NAME2	= push_swap
+NAME1	= checker
+NAME2	= push_swap
 
 CFLAGS 	= -Wall -Wextra -Werror -g
-SRC1 	= ft_parsing.c main.c \
-			ft_sa.c ft_sb.c ft_ss.c \
-			ft_pa.c ft_pb.c \
-			ft_ra.c ft_rb.c ft_rr.c \
-			ft_rra.c ft_rrb.c ft_rrr.c \
+SRC1 	= checker.c instruction/instruc1.c instruction/instruc2.c instruction/instruc3.c utils.c utils2.c utils3.c sort_arg.c utils4.c
 
-#SRC2 	= 
+SRC2 	= push_swap.c instruction/instruc1.c instruction/instruc2.c instruction/instruc3.c utils.c utils2.c utils3.c sort_arg.c algo_chunk/chunk1.c algo_chunk/big_list.c algo_chunk/chunk2.c algo_chunk/chunk3.c utils4.c algo_chunk/chunk4.c algo_chunk/chunk5.c
 
 .PHONY: all clean fclean re
 
@@ -19,14 +15,14 @@ NC		=	\033[0m
 OBJSFD 	= srcs
 
 OBJS1 	= $(addprefix $(OBJSFD)/,$(SRC1:.c=.o))
-#OBJS2 	= $(addprefix $(OBJSFD)/,$(SRC2:.c=.o))
+OBJS2 	= $(addprefix $(OBJSFD)/,$(SRC2:.c=.o))
 
 HDR 		= -I./includes
 LIBFT_HDR 	= -I./libft/includes
 LIB_BINARY	= -L./libft -lft
 LIBFT		= libft/libft.a
 
-all: $(NAME1) #$(NAME2)
+all: $(NAME1) $(NAME2)
 
 $(LIBFT):
 	@make -C libft re
@@ -39,21 +35,21 @@ $(NAME1): $(OBJS1) $(LIBFT)
 	@gcc $(CFLAGS) $(OBJS1) $(LIB_BINARY) -o $@
 	@echo "$(GREEN)$@ is ready to test$(NC)"
 
-#$(NAME2): $(OBJS2) $(LIBFT)
-#	@echo "$(GREEN)compiling $@...$(NC)"
-#	@gcc $(CFLAGS) $(OBJS2) $(LIB_BINARY) -o $@
-#	@echo "$(GREEN)$@ is ready to test$(NC)"
+$(NAME2): $(OBJS2) $(LIBFT)
+	@echo "$(GREEN)compiling $@...$(NC)"
+	@gcc $(CFLAGS) $(OBJS2) $(LIB_BINARY) -o $@
+	@echo "$(GREEN)$@ is ready to test$(NC)"
 
 clean:
 	@echo "$(RED)deleting object files...$(NC)"
-#	@/bin/rm -f $(OBJS2)
+	@/bin/rm -f $(OBJS2)
 	@/bin/rm -f $(OBJS1)
 	@make -C ./libft clean
 
 fclean: clean
 	@echo "$(RED)deleting both executables...$(NC)"
 	@/bin/rm -f $(NAME1)
-#	@/bin/rm -f $(NAME2)
+	@/bin/rm -f $(NAME2)
 	@make -C ./libft fclean
 
 re: fclean all

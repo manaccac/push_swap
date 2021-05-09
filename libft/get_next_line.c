@@ -5,91 +5,65 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: manaccac <manaccac@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/11 12:14:31 by jdel-ros          #+#    #+#             */
-/*   Updated: 2020/06/01 14:04:49 by manaccac         ###   ########lyon.fr   */
+/*   Created: 2021/03/29 12:42:48 by manaccac          #+#    #+#             */
+/*   Updated: 2021/05/06 11:25:45 by manaccac         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int				strbn(char *str)
-{
-	int i;
+#define BUFFER_SIZE 5
 
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '\n')
-			return (1);
-		i++;
-	}
-	return (0);
+int	ft_error(char **mem)
+{
+	free(*mem);
+	*mem = NULL;
+	return (-1);
 }
 
-static int				checkstr(char **str, char **line)
+int	ft_error_line(char **mem, char **line)
 {
-	while (*str != NULL)
-	{
-		if (strbn(*str) == 1)
-		{
-			if ((*line = ft_strdupbn(*str)) == NULL)
-				return (-1);
-			if ((*str = ft_strchrcut(*str, '\n')) == NULL)
-				return (-1);
-			return (1);
-		}
-		else if (strbn(*str) == 0)
-		{
-			*line = *str;
-			*str = NULL;
-			return (0);
-		}
-	}
-	if (*str == NULL)
-	{
-		*line = ft_strdup("");
-		return (0);
-	}
-	return (0);
+	free(*mem);
+	free(*line);
+	*mem = NULL;
+	*line = NULL;
+	return (-1);
 }
 
-static int				nlishere(char **str, char **line)
+static int	ft_scan(char **mem, char **line)
 {
-	if (strbn(*str) == 1)
-	{
-		if ((*line = ft_strdupbn(*str)) == NULL)
-			return (-1);
-		*str = ft_strchrcut(*str, '\n');
-		return (1);
-	}
-	return (0);
+	int	n;
+	int	size;
+
+	n = ft_strchr_int(*mem, '\n');
+	size = ft_strlen(*mem) - n - 1;
+	if (n == 0)
+		return (gnl_malloc(mem, line, size));
+	else if (n > 0)
+		return (gnl_malloc2(mem, line, size, n));
+	return (ft_error(mem));
 }
 
-int						get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
-	static char		*str;
-	int				ret;
-	int				ret1;
-	char			buf[2048];
+	char		buf[BUFFER_SIZE + 1];
+	int			ret;
+	static char	*mem;
 
-	ret = 1;
-	if (fd < 0 || line == NULL)
-		return (-1);
-	while ((ret = read(fd, buf, 2048)) > 0)
+	if (!mem)
+		mem = ft_strndup("", 0);
+	else if ((ft_strchr_int(mem, '\n') >= 0))
+		return (ft_scan(&mem, line));
+	ret = read(fd, buf, BUFFER_SIZE);
+	while (ret > 0)
 	{
-		if (str == NULL)
-			if ((str = ft_strdup("")) == NULL)
-				return (-1);
+		if (ret <= 0)
+			break ;
 		buf[ret] = '\0';
-		if ((str = ft_strjoin(str, buf)) == NULL)
-			return (-1);
-		if ((ret1 = nlishere(&str, line)) != 0)
-			return (ret1);
+		mem = ft_strjoin_free_s1(mem, buf);
+		if ((ft_strchr_int(mem, '\n') >= 0))
+			return (ft_scan(&mem, line));
+		ret = read(fd, buf, BUFFER_SIZE);
 	}
-	if (ret == -1)
-		return (-1);
-	if ((ret1 = checkstr(&str, line)) == 0)
-		return (0);
-	else
-		return (1);
+	return (end_gnl(line, mem, ret));
 }

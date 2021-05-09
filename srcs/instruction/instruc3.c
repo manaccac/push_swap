@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   instruc3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: manaccac <manaccac@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/07 12:40:13 by jdel-ros          #+#    #+#             */
-/*   Updated: 2020/06/01 14:03:38 by manaccac         ###   ########lyon.fr   */
+/*   Created: 2021/03/29 12:43:25 by manaccac          #+#    #+#             */
+/*   Updated: 2021/05/06 11:25:45 by manaccac         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../includes/push_swap.h"
 
-#include "libft.h"
-
-int		ft_isprint(int c)
+int	ft_rrr(t_struct *p)
 {
-	if (c)
+	int	bool;
+
+	bool = 0;
+	if (p->push)
 	{
-		if (c >= 32 && c <= 126)
-			return (1);
-		else
-			return (0);
+		bool = 1;
+		p->push = 0;
 	}
+	if (p->push == 1)
+		write(STDOUT_FILENO, "rrr\n", 4);
+	ft_rra(p);
+	ft_rrb(p);
+	if (bool)
+		p->push = 1;
 	return (0);
 }
