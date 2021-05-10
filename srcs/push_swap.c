@@ -6,7 +6,7 @@
 /*   By: manaccac <manaccac@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 10:53:50 by manaccac          #+#    #+#             */
-/*   Updated: 2021/05/09 10:04:12 by manaccac         ###   ########lyon.fr   */
+/*   Updated: 2021/05/10 16:51:16 by manaccac         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,57 @@ void	main3(int ac, char **av, t_struct *s, int i)
 	if (s->size_a >= 20)
 	{
 		create_sort_tab(s);
+		/*
+		int io = 0;
+		while (s->sorted[io])
+		{
+			dprintf(1, "sorted[%d] = %d\n", io, s->sorted[io]);
+			io++;
+		}
+		*/
 		big_list(s);
+		/*
+		int io = 0;
+		dprintf(1, "big_list size = %d\n", s->big_size);
+		while (s->big_list[io])
+		{
+			dprintf(1, "big_list[%d] = %d\n", io, s->big_list[io]);
+			io++;
+		}
+		*/
 		reducechunk(s);
+		/*
+		int io = 0;
+		dprintf(1, "n_chunk = %d\n", s->n_chunk);
+		while (s->moinchunk[io])
+		{
+			dprintf(1, "moinchunk[%d] = %d\n", io, s->moinchunk[io]);
+			io++;
+		}
+		*/
 		create_chunk(s);
+		/*
+		int io = 0;
+		dprintf(1, "n_chunk = %d\n", s->n_chunk);
+		while (s->chunk_len[io])
+		{
+			dprintf(1, "chunk_len[%d] = %d\n", io, s->chunk_len[io]);
+			io++;
+		}
+		int jo;
+		io = 0;
+		while (s->chunk[io])
+		{
+			jo = 0;
+			while (s->chunk[io][jo])
+			{
+				dprintf(1, "chunk[%d][%d] = %d\n", io, jo, s->chunk[io][jo]);
+				jo++;
+			}
+			io++;
+		}
+		
+		*/
 		ft_algo_chunk(s);
 	}
 	else
